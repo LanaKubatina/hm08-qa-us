@@ -4,13 +4,36 @@ module.exports = {
     toField: '#to',
     phoneNumberField: '#phone',
     codeField: '#code',
+    cardNumber: '#number',
+    cvvField: '//div[@class="card-code-input"]//input[@id="code"]',
+    messageField : '#comment',
+
     // Buttons
     callATaxiButton: 'button=Call a taxi',
     phoneNumberButton: '//div[starts-with(text(), "Phone number")]',
     nextButton: 'button=Next',
     confirmButton: 'button=Confirm',
+    supportiveButton: 'div=Supportive',
+    paymentMethodButton: '.pp-button.filled',
+    addCardButton: '.pp-row.disabled',
+    linkButton: 'div[class="pp-buttons"] button[type="submit"]',
+    switchButton: '(//span[@class="slider round"])[1]',
+    plusButton: '//div[@class="r-group"]//div[1]//div[1]//div[2]//div[1]//div[3]',
+    orderButton: '//button[@class="smart-button"]',
+
+    //Marks
+    checkMark : '.checkmark',
+    freeField : '//div[@class="plc"]',
+    counterValue0: '//div[normalize-space()="2"]',
+    counterValue2: './/div[class=‘r-counter’]/div/div[@class=‘counter-value’ text()=‘2’]',
+    orderContent: '//div[@class="order-header-content"]',
+    
     // Modals
     phoneNumberModal: '.modal',
+    paymentMethodModal: '(//div[@class="section active"])[2]',
+    addingCardModal: '//div[@class="section active unusual"]',
+    carSearchModal: '//div[@class="order-subbody"]',
+
     // Functions
     fillAddresses: async function(from, to) {
         const fromField = await $(this.fromField);
@@ -48,4 +71,18 @@ module.exports = {
         await codeField.setValue(code)
         await $(this.confirmButton).click()
     },
-};
+    chooseSupportivePlan: async function() {
+        const supportiveButton = await $(this.supportiveButton);
+        await supportiveButton.waitForClickable();
+        await supportiveButton.click();
+        await browser.pause(2000);
+    },
+    order: async function() {
+    const orderButton = await $(page.orderButton);
+    await orderButton.waitForClickable();
+    await orderButton.click();
+    const carSearchModal = await $(page.carSearchModal);
+    await carSearchModal.waitForDisplayed();
+    },
+
+}
