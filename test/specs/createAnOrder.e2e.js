@@ -112,7 +112,7 @@ describe('Create an order', () => {
         await orderContent.waitForDisplayed();
         await browser.pause(10000);
         await expect(carSearchModal).toBeExisting();
-        // The case has a bug, because we have an error: "page is not defined"
+        // The case has a bug, because we have an error: "carSearchModal is not defined"
     })
 })
 

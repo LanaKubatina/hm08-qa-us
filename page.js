@@ -78,10 +78,10 @@ module.exports = {
         await browser.pause(2000);
     },
     order: async function() {
-    const orderButton = await $(page.orderButton);
+    const orderButton = await $(this.orderButton);
     await orderButton.waitForClickable();
     await orderButton.click();
-    const carSearchModal = await $(page.carSearchModal);
+    const carSearchModal = await $(this.carSearchModal);
     await carSearchModal.waitForDisplayed();
     },
 
