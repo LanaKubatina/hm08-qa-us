@@ -106,13 +106,16 @@ describe('Create an order', () => {
     it('should wait for the driver info to appear', async () => {
         await browser.url(`/`)
         await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        await page.chooseSupportivePlan();
+        const businessButton = await $(page.businessButton);
+        await businessButton.click();
         await page.order();
+        const carSearchModal = await $(page.carSearchModal);
+        await carSearchModal.waitForDisplayed();
         const orderContent = await $(page.orderContent);
         await orderContent.waitForDisplayed();
-        await browser.pause(10000);
-        await expect(carSearchModal).toBeExisting();
-        // The case has a bug, because we have an error: "carSearchModal is not defined"
+        await browser.pause(30000);
+        await expect(orderContent).toBeExisting();
+
     })
 })
 

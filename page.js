@@ -14,6 +14,7 @@ module.exports = {
     nextButton: 'button=Next',
     confirmButton: 'button=Confirm',
     supportiveButton: 'div=Supportive',
+    businessButton: 'div=Business',
     paymentMethodButton: '.pp-button.filled',
     addCardButton: '.pp-row.disabled',
     linkButton: 'div[class="pp-buttons"] button[type="submit"]',
@@ -26,13 +27,13 @@ module.exports = {
     freeField : '//div[@class="plc"]',
     counterValue0: '//div[normalize-space()="2"]',
     counterValue2: './/div[class=‘r-counter’]/div/div[@class=‘counter-value’ text()=‘2’]',
-    orderContent: '//div[@class="order-header-content"]',
     
     // Modals
     phoneNumberModal: '.modal',
     paymentMethodModal: '(//div[@class="section active"])[2]',
     addingCardModal: '//div[@class="section active unusual"]',
     carSearchModal: '//div[@class="order-subbody"]',
+    orderContent: '(//div[@class="order-header-content"])[1]',
 
     // Functions
     fillAddresses: async function(from, to) {
@@ -81,8 +82,6 @@ module.exports = {
     const orderButton = await $(this.orderButton);
     await orderButton.waitForClickable();
     await orderButton.click();
-    const carSearchModal = await $(this.carSearchModal);
-    await carSearchModal.waitForDisplayed();
     },
 
 }
